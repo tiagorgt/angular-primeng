@@ -1,0 +1,13 @@
+<div class="layout-sidebar" [ngClass]="{'layout-sidebar-active': app.sidebarActive}">
+
+  <p-scrollPanel #scrollPanel [style]="{height: '100%'}">
+    <ul class="layout-menu">
+      <li *ngFor="let m of menu">
+        <a [routerLink]="m.routerLink">
+          <span class="menuitem-text">{{m.label}}</span>
+        </a>
+      </li>
+    </ul>
+  </p-scrollPanel>
+
+</div>

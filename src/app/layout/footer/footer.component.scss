@@ -1,0 +1,20 @@
+@import '../layout-variables.scss';
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: $footerBgColor;
+    border-top: 1px solid $footerBorderColor;
+    .footer-content {
+        display: table;
+        height: 50px;
+        padding-left: .5em;
+        span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+}

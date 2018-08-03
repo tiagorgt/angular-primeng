@@ -1,0 +1,22 @@
+@import '../layout-variables.scss';
+@import '../layout-mixins.scss';
+.layout-topbar {
+    display: table;
+    height: 50px;
+    padding-left: .5em;
+    background-color: $topbarBgColor;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+    .menu-btn {
+        display: table-cell;
+        vertical-align: middle;
+        cursor: pointer;
+        i {
+            font-size: 25px;
+        }
+    }
+}

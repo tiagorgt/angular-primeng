@@ -1,0 +1,8 @@
+<div class="layout-wrapper" [ngClass]="{'layout-sidebar-active': sidebarActive}">
+    <layout-menu></layout-menu>
+    <layout-topbar></layout-topbar>
+    <layout-main>
+        <router-outlet></router-outlet>
+    </layout-main>
+    <layout-footer></layout-footer>
+</div>

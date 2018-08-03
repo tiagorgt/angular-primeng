@@ -1,0 +1,37 @@
+$textColor:#1b1b1b;
+$textSecondaryColor:#888888;
+$fontSize:16px;
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: Arial;
+    font-size: $fontSize;
+    color: $textColor;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f4f6f9;
+    position: relative;
+}
+
+a {
+    color: $textSecondaryColor;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    body {
+        &.hidden-overflow {
+            overflow: hidden;
+        }
+    }
+}
