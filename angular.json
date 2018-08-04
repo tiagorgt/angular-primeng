@@ -21,11 +21,11 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "src/style.scss",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeng/resources/themes/omega/theme.scss",
               "node_modules/primeicons/primeicons.css",
-              "src/assets/sass/theme/theme.scss",
-              "src/style.scss"
+              "src/assets/sass/theme/theme.scss"
             ],
             "scripts": []
           },

@@ -2,15 +2,115 @@
   <div class="ui-g-12">
     <layout-page-header [title]="'Item'"></layout-page-header>
   </div>
+</div>
+<div class="ui-g">
   <div class="ui-g-12">
     <p-panel>
       <p-header>
-        Header content here
+        Item
       </p-header>
-      Body Content
-      <p-footer>
-        Footer content here
-      </p-footer>
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              <label for="name">Nome</label>
+            </div>
+            <div class="ui-grid-col-6">
+              <input id="name" type="text" pKeyFilter="alpha" formControlName="name" pInputText/>
+            </div>
+            <div class="ui-grid-col-4">
+              <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['name'])"></p-message>
+            </div>
+          </div>
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              <label for="unitMeasurement">Unidade</label>
+            </div>
+            <div class="ui-grid-col-3">
+              <p-dropdown [options]="unitMeasurementOptions" formControlName="unitMeasurement" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="ui-grid-col-4">
+              <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['unitMeasurement'])"></p-message>
+            </div>
+          </div>
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              <label for="amount">Quantidade</label>
+            </div>
+            <div class="ui-grid-col-3">
+              <div class="ui-inputgroup">
+                <input id="amount" type="text" formControlName="amount" pInputText currencyMask [options]="setAmountOptions()">
+                <span class="ui-inputgroup-addon">{{ itemForm.get('unitMeasurement').value.id }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              <label for="price">Preço</label>
+            </div>
+            <div class="ui-grid-col-3">
+              <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon">R$</span>
+                <input id="price" type="text" formControlName="price" pInputText currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', precision: '3' }">
+              </div>
+            </div>
+            <div class="ui-grid-col-4">
+              <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['price'])"></p-message>
+            </div>
+          </div>
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              <label for="perishableProduct">Produto Perecível</label>
+            </div>
+            <div class="ui-grid-col-3">
+              <div class="ui-inputgroup">
+                <p-checkbox id="perishableProduct" formControlName="perishableProduct" binary="true"></p-checkbox>
+              </div>
+            </div>
+            <div class="ui-grid-col-4">
+              <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['perishableProduct'])"></p-message>
+            </div>
+          </div>
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              <label for="expirationDate">Data de Validade</label>
+            </div>
+            <div class="ui-grid-col-3">
+              <div class="ui-inputgroup">
+                <p-calendar id="expirationDate" formControlName="expirationDate" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+              </div>
+            </div>
+            <div class="ui-grid-col-4">
+              <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['expirationDate'])"></p-message>
+              <p-message severity="error" text="Produto vencido" *ngIf="isItemDateExpired()"></p-message>
+            </div>
+          </div>
+
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-2">
+                <label for="manufacturingDate">Data de Fabricação</label>
+              </div>
+              <div class="ui-grid-col-3">
+                <div class="ui-inputgroup">
+                    <p-calendar id="manufacturingDate" formControlName="manufacturingDate" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+                </div>
+              </div>
+              <div class="ui-grid-col-4">
+                <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['manufacturingDate'])"></p-message>
+                <p-message severity="error" text="Data de fabricação não pode ser superior a data de validade" *ngIf="isManufacturingDateAfterExpirationDate()"></p-message>
+              </div>
+            </div>
+        </div>
+        <div class="action-content">
+        <button pButton type="submit" label="Salvar"></button>&nbsp;
+        <button pButton type="button" label="Cancelar" (click)="cancel()" class="ui-button-secondary"></button>
+        </div>
+      </form>
     </p-panel>
   </div>
 </div>

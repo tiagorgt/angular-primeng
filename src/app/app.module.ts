@@ -9,6 +9,15 @@ import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { PanelModule } from 'primeng/panel';
 import { LayoutModule } from './layout/layout.module';
+import { InputTextModule } from 'primeng/inputtext';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MessageModule } from '../../node_modules/primeng/primeng';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import {CheckboxModule} from 'primeng/checkbox';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
     imports: [
@@ -18,7 +27,16 @@ import { LayoutModule } from './layout/layout.module';
         ScrollPanelModule,
         ButtonModule,
         PanelModule,
-        LayoutModule
+        LayoutModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        MessageModule,
+        DropdownModule,
+        InputMaskModule,
+        KeyFilterModule,
+        CurrencyMaskModule,
+        CheckboxModule,
+        CalendarModule
     ],
     declarations: [
         AppComponent,
