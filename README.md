@@ -1,3 +1,3 @@
 # Angular PrimeNG
 
-Web application using Angular 6 + PrimeNG
+Web application Angular 6 and PrimeNG
