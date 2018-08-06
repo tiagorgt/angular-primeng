@@ -3,12 +3,8 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemService } from './item.service';
 import { Item } from '../model/item';
-
-enum UnitMeasurement {
-  Litro = 'lt',
-  Quilograma = 'kg',
-  Unidade = 'un'
-}
+import { UnitMeasurement } from '../model/unit-measurement';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-item',
@@ -21,8 +17,14 @@ export class ItemComponent implements OnInit {
   unitMeasurementOptions: any[];
   formSubmitted: boolean;
   item: Item = new Item();
+  UnitMeasurement = UnitMeasurement;
 
-  constructor(private _fb: FormBuilder, private _router: Router, private _itemService: ItemService, private _activatedRoute: ActivatedRoute) {
+  constructor(
+    private _fb: FormBuilder,
+    private _router: Router,
+    private _itemService: ItemService,
+    private _activatedRoute: ActivatedRoute,
+    private _messageService: MessageService) {
     this.createFormGroup();
   }
 
@@ -76,8 +78,15 @@ export class ItemComponent implements OnInit {
       this.item.name = this.itemForm.get('name').value;
       this.item.perishableProduct = this.itemForm.get('perishableProduct').value;
       this.item.price = this.itemForm.get('price').value;
-      this.item.unitMeasurement = this.itemForm.get('unitMeasurement').value;
-      this._itemService.save(this.item);
+      this.item.unitMeasurement = this.itemForm.get('unitMeasurement').value.id;
+
+      try {
+        this._itemService.save(this.item);
+        this._messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Item salvo com sucesso' });
+        this._router.navigate(['/item-list']);
+      } catch (ex) {
+        this._messageService.add({ severity: 'error', summary: 'Erro', detail: 'Ocorreu um erro ao tentar salvar o item' });
+      }
     }
   }
 
@@ -100,13 +109,13 @@ export class ItemComponent implements OnInit {
   getUnitMeasurementOptions() {
     this.unitMeasurementOptions = [
       {
-        id: 'lt',
+        id: UnitMeasurement.Litro,
         name: 'Litro'
       }, {
-        id: 'kg',
+        id: UnitMeasurement.Quilograma,
         name: 'Quilograma'
       }, {
-        id: 'un',
+        id: UnitMeasurement.Unidade,
         name: 'Unidade'
       }
     ]
@@ -160,6 +169,13 @@ export class ItemComponent implements OnInit {
   }
 
   getItem(key: string) {
-    this.item = this._itemService.getById('');
+    this.item = this._itemService.getById(key);
+    this.itemForm.get('name').setValue(this.item.name);
+    this.itemForm.get('unitMeasurement').setValue(this.unitMeasurementOptions.find(u => u.id == this.item.unitMeasurement));
+    this.itemForm.get('amount').setValue(this.item.amount);
+    this.itemForm.get('price').setValue(this.item.price);
+    this.itemForm.get('perishableProduct').setValue(this.item.perishableProduct);
+    this.itemForm.get('expirationDate').setValue(this.item.expirationDate);
+    this.itemForm.get('manufacturingDate').setValue(this.item.manufacturingDate);
   }
 }

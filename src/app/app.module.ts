@@ -11,13 +11,17 @@ import { PanelModule } from 'primeng/panel';
 import { LayoutModule } from './layout/layout.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MessageModule } from '../../node_modules/primeng/primeng';
+import { MessageModule, ConfirmationService } from '../../node_modules/primeng/primeng';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
-import {KeyFilterModule} from 'primeng/keyfilter';
+import { KeyFilterModule } from 'primeng/keyfilter';
 import { CurrencyMaskModule } from "ng2-currency-mask";
-import {CheckboxModule} from 'primeng/checkbox';
-import {CalendarModule} from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { GrowlModule } from 'primeng/growl';
+import { MessageService } from '../../node_modules/primeng/components/common/messageservice';
 
 @NgModule({
     imports: [
@@ -36,14 +40,20 @@ import {CalendarModule} from 'primeng/calendar';
         KeyFilterModule,
         CurrencyMaskModule,
         CheckboxModule,
-        CalendarModule
+        CalendarModule,
+        TableModule,
+        ConfirmDialogModule,
+        GrowlModule
     ],
     declarations: [
         AppComponent,
         ItemComponent,
         ItemListComponent
     ],
-    providers: [],
+    providers: [
+        ConfirmationService,
+        MessageService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

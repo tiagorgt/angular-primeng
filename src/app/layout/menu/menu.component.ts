@@ -21,7 +21,8 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.menu = [
-      { label: 'Item List', routerLink: ['/item-list'] },
+      { label: 'Lista de Itens', routerLink: ['/item-list'] },
+      { label: 'Item', routerLink: ['/item'] },
     ];
   }
 }

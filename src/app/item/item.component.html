@@ -7,7 +7,7 @@
   <div class="ui-g-12">
     <p-panel>
       <p-header>
-        Item
+        Informações do Item
       </p-header>
       <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
@@ -16,7 +16,7 @@
               <label for="name">Nome</label>
             </div>
             <div class="ui-grid-col-6">
-              <input id="name" type="text" pKeyFilter="alpha" formControlName="name" pInputText/>
+              <input id="name" type="text" formControlName="name" pKeyFilter="alpha" pInputText maxlength="50"/>
             </div>
             <div class="ui-grid-col-4">
               <p-message severity="error" text="Campo obrigatório" *ngIf="isFormControlValid(itemForm.controls['name'])"></p-message>

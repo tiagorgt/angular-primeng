@@ -16,16 +16,16 @@ export class ItemService {
   }
 
   getById(key: string): Item {
-    return JSON.parse(localStorage.getItem(key));
+    return new Item(JSON.parse(localStorage.getItem(key)));
   }
 
   list(): Item[] {
-    let items = [],
-      keys = Object.keys(localStorage),
-      i = 0, key;
+    let items: Item[] = [];
+    let keys = Object.keys(localStorage);
+    let key;
 
-    for (; key = keys[i]; i++) {
-      items.push(key + '=' + localStorage.getItem(key));
+    for (let i = 0; key = keys[i]; i++) {
+      items.push(new Item(JSON.parse(localStorage.getItem(key))));
     }
 
     return items;
